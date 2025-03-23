@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
+import { useTouch } from '../../hooks/useTouch';
 
 export default function Modal({ isOpen, onClose, title, children }) {
+  const { handleTouchStart, handleTouchEnd } = useTouch({
+    onTap: onClose,
+  });
+
   // Close modal when pressing Escape key
   useEffect(() => {
     const handleEscape = (e) => {
@@ -35,6 +40,8 @@ export default function Modal({ isOpen, onClose, title, children }) {
           </h3>
           <button
             onClick={onClose}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             className="text-gray-400 hover:text-gray-500 focus:outline-none"
           >
             <span className="sr-only">Close</span>
