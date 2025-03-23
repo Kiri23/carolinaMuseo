@@ -6,7 +6,15 @@ export function PageBuilderProvider({ children }) {
   const [components, setComponents] = useState([]);
 
   const addComponent = (component) => {
-    setComponents(prev => [...prev, component]);
+    // Add default position if not provided
+    const withPosition = {
+      ...component,
+      position: component.position || {
+        x: 50,
+        y: 50
+      }
+    };
+    setComponents(prev => [...prev, withPosition]);
   };
 
   const removeComponent = (componentId) => {
@@ -15,7 +23,13 @@ export function PageBuilderProvider({ children }) {
 
   const updateComponent = (componentId, newProps) => {
     setComponents(prev => prev.map(comp => 
-      comp.id === componentId ? { ...comp, props: { ...comp.props, ...newProps } } : comp
+      comp.id === componentId 
+        ? { 
+            ...comp, 
+            props: { ...comp.props, ...newProps },
+            position: newProps.position || comp.position 
+          } 
+        : comp
     ));
   };
 
