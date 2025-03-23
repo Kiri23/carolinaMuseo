@@ -3,8 +3,11 @@ import Button from "../ui/button";
 import Modal from "../ui/Modal";
 import VideoPlayer from "../ui/VideoPlayer";
 import Background from "../ui/Background";
-import { DndContext, useDraggable, useDroppable } from '@dnd-kit/core';
+import { DndContext, useDroppable, DragOverlay } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
+import { useState } from 'react';
+import { DraggableComponent } from './DraggableComponent';
+import { DragOverlay as CustomDragOverlay } from './DragOverlay';
 
 const COMPONENT_MAP = {
   Background,
@@ -12,32 +15,6 @@ const COMPONENT_MAP = {
   Modal,
   VideoPlayer,
 };
-
-function DraggableComponent({ component }) {
-  const Component = COMPONENT_MAP[component.type];
-  const {attributes, listeners, setNodeRef, transform} = useDraggable({
-    id: component.id,
-    data: component
-  });
-  
-  const style = transform ? {
-    transform: CSS.Transform.toString(transform),
-    position: 'absolute',
-    left: component.position?.x || 0,
-    top: component.position?.y || 0,
-    zIndex: 1
-  } : {
-    position: 'absolute',
-    left: component.position?.x || 0,
-    top: component.position?.y || 0
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <Component {...component.props} />
-    </div>
-  );
-}
 
 function DroppableArea({ children }) {
   const {setNodeRef} = useDroppable({
@@ -56,9 +33,16 @@ function DroppableArea({ children }) {
 
 export default function PreviewArea() {
   const { components, updateComponent } = usePageBuilder();
+  const [activeComponent, setActiveComponent] = useState(null);
   
   const backgroundComponent = components.find(comp => comp.type === 'Background');
   const otherComponents = components.filter(comp => comp.type !== 'Background');
+
+  const handleDragStart = (event) => {
+    const { active } = event;
+    const draggedComponent = components.find(c => c.id === active.id);
+    setActiveComponent(draggedComponent);
+  };
 
   const handleDragEnd = (event) => {
     const { active, delta } = event;
@@ -73,11 +57,15 @@ export default function PreviewArea() {
         }
       });
     }
+    setActiveComponent(null);
   };
 
   return (
     <div className="min-h-screen">
-      <DndContext onDragEnd={handleDragEnd}>
+      <DndContext 
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
         {backgroundComponent ? (
           <Background {...backgroundComponent.props}>
             <DroppableArea>
@@ -93,6 +81,12 @@ export default function PreviewArea() {
             ))}
           </DroppableArea>
         )}
+        
+        <DragOverlay>
+          {activeComponent && (
+            <CustomDragOverlay component={activeComponent} />
+          )}
+        </DragOverlay>
       </DndContext>
     </div>
   );
