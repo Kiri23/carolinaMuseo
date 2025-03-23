@@ -4,6 +4,7 @@ import Button from "./components/ui/button.jsx";
 import Modal from "./components/ui/Modal.jsx";
 import VideoPlayer from "./components/ui/VideoPlayer.jsx";
 
+
 function App() {
   const [count, setCount] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,8 +21,9 @@ function App() {
 
 
   return (
-    // this div act as layout component
-    <div className="flex justify-center items-center gap-18">
+    // this div act as layout component 
+    // be aware im merging responsabilities now with BG
+    <div className={`flex  justify-center items-center gap-18 background-image bg-[url(/assets/cuartos/1/panel.jpg)]`}>
       <Button onClick={handleClickButton1} >
         Button1
       </Button>
