@@ -45,4 +45,10 @@ export function PageBuilderProvider({ children }) {
   );
 }
 
-export const usePageBuilder = () => useContext(PageBuilderContext);
+export const usePageBuilder = () => {
+  const context = useContext(PageBuilderContext);
+  if (!context) {
+    throw new Error('usePageBuilder must be used within a PageBuilderProvider');
+  }
+  return context;
+};
