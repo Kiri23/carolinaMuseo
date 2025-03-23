@@ -1,17 +1,20 @@
 import "./App.css";
 import PageBuilder from "./components/PageBuilder/PageBuilder";
 import PreviewArea from "./components/PreviewArea/PreviewArea";
-import { PageBuilderProvider } from "./context/PageBuilderContext";
+import { DndKitProvider } from './implementations/DndKitProvider';
+import { PageBuilderProvider } from './context/PageBuilderContext';
 
 function App() {
   return (
     <PageBuilderProvider>
-      <div className="min-h-screen flex flex-col">
-        <div className="flex-1 bg-[url(/assets/cuartos/1/panel.jp)] bg-cover">
-          <PreviewArea />
+      <DndKitProvider>
+        <div className="min-h-screen flex flex-col">
+          <div className="flex-1 bg-[url(/assets/cuartos/1/panel.jp)] bg-cover">
+            <PreviewArea />
+          </div>
+          <PageBuilder />
         </div>
-        <PageBuilder />
-      </div>
+      </DndKitProvider>
     </PageBuilderProvider>
   );
 }
