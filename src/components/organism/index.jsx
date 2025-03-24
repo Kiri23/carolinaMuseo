@@ -4,3 +4,4 @@ export { DragOverlay } from "./dragAndDrop/DragOverlay";
 export { ComponentEditor } from "./pageBuilder/ComponentEditor";
 export { PageBuilder } from "./pageBuilder/PageBuilder";
 export { PreviewArea } from "./pageBuilder/PreviewArea";
+export { Sidebar } from "./sidebar";
