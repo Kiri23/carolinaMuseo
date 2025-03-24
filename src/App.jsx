@@ -6,11 +6,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Redirect root to admin */}
-        <Route path="/" element={<Navigate to="/admin/page-builder" replace />} />
-        
-        {/* Admin routes with layout */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route
+          path="/"
+          element={<Navigate to="/admin/page-builder" replace />}
+        />
+
+        {/* Default layout */}
+        <Route path="/admin" element={<AdminLayout variant="default" />}>
+          <Route path="page-builder" element={<PageBuilder />} />
+          <Route path="scenes" element={<Scenes />} />
+        </Route>
+
+        {/* Reversed layout */}
+        <Route path="/admin-reversed" element={<AdminLayout variant="reversed" />}>
           <Route path="page-builder" element={<PageBuilder />} />
           <Route path="scenes" element={<Scenes />} />
         </Route>

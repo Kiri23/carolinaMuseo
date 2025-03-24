@@ -5,5 +5,5 @@ export function getSlotContent(children, SlotComponent) {
   const slot = childrenArray.find(
     (child) => child.type?.slotName === SlotComponent.slotName
   );
-  return slot?.props?.children || null;
+  return slot;
 }
