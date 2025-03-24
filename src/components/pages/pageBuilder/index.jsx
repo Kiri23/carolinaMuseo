@@ -4,7 +4,7 @@ import { usePageBuilder } from "../../../context/PageBuilderContext";
 import { DragOverlay } from "../../organism/dragAndDrop/DragOverlay";
 import { COMPONENT_MAP } from "../../organism/pageBuilder/constants";
 
-function PageBuilderContent() {
+function PageBuilderContent({ variant = "previewTop" }) {
   const { components, updateComponent } = usePageBuilder();
 
   const handleDragEnd = (event) => {
@@ -39,18 +39,35 @@ function PageBuilderContent() {
       onDragEnd={handleDragEnd}
       renderDragOverlay={renderDragOverlay}
     >
-      <div>
-        <PreviewArea />
+      <div className="flex flex-col h-screen">
+        {variant === "previewTop" ? (
+          <>
+            <div className="flex-1 overflow-auto">
+              <PreviewArea />
+            </div>
+            <div className="h-64 border-t">
+              <PageBuilder />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="h-64">
+              <PageBuilder />
+            </div>
+            <div className="flex-1">
+              <PreviewArea />
+            </div>
+          </>
+        )}
       </div>
-      <PageBuilder />
     </DndKitProvider>
   );
 }
 
-export default () => {
+export default ({ variant }) => {
   return (
     <PageBuilderProvider>
-      <PageBuilderContent />
+      <PageBuilderContent variant={variant} />
     </PageBuilderProvider>
   );
 };

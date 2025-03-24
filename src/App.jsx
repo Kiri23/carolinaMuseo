@@ -13,13 +13,10 @@ function App() {
 
         {/* Default layout */}
         <Route path="/admin" element={<AdminLayout variant="default" />}>
-          <Route path="page-builder" element={<PageBuilder />} />
-          <Route path="scenes" element={<Scenes />} />
-        </Route>
-
-        {/* Reversed layout */}
-        <Route path="/admin-reversed" element={<AdminLayout variant="reversed" />}>
-          <Route path="page-builder" element={<PageBuilder />} />
+          <Route
+            path="page-builder"
+            element={<PageBuilder variant="previewBottom" />}
+          />
           <Route path="scenes" element={<Scenes />} />
         </Route>
       </Routes>

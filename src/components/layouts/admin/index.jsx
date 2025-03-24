@@ -3,6 +3,7 @@ import { getSlotContent } from "../../../utils/templateUtils";
 import { Sidebar as DefaultSidebar } from "../../organism";
 
 export function AdminLayout({ children, variant = 'default' }) {
+  // The components need to have a static property called slotName to place the component dinamically 
   const customSidebar = getSlotContent(children, DefaultSidebar) || <DefaultSidebar />;
 
   const layouts = {
