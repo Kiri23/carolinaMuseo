@@ -15,7 +15,7 @@ function App() {
         <Route path="/admin" element={<AdminLayout variant="default" />}>
           <Route
             path="page-builder"
-            element={<PageBuilder variant="previewBottom" />}
+            element={<PageBuilder variant="previewTop" />}
           />
           <Route path="scenes" element={<Scenes />} />
         </Route>
