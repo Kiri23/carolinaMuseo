@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Modal, VideoPlayer, Background } from "../../../ui";
+import { KioskLayout } from "../../../layouts";
 
 export default function BorinquenPanel() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,10 +17,10 @@ export default function BorinquenPanel() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Background imageUrl="/carolinaMuseo/assets/cuartos/1/panel.jpg">
-        <Button onClick={handleClickButton1}>Button1</Button>
-        <Button onClick={handleClickButton2}>Button2</Button>
+    <Background imageUrl="/carolinaMuseo/assets/cuartos/1/panel.jpg">
+      <KioskLayout>
+        <Button onClick={handleClickButton1} variant="circular" >Button1</Button>
+        <Button onClick={handleClickButton2} variant="circular">Button2</Button>
 
         <Modal
           isOpen={isModalOpen}
@@ -47,7 +48,7 @@ export default function BorinquenPanel() {
             />
           </div>
         </Modal>
-      </Background>
-    </div>
+      </KioskLayout>
+    </Background>
   );
 }
