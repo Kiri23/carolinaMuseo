@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
   </head>
-  <body>b
+  <body>
     <div id="root"></div>
+    <!-- use relative path for github pages -->
     <script type="module" src="./src/main.jsx"></script>
     <script>
+      // hack to mack github pages work
       (function () {
         const redirect = localStorage.getItem("redirect");
         if (redirect) {
