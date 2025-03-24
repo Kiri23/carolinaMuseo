@@ -4,7 +4,7 @@ import { Scenes, PageBuilder } from "./components/pages";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/carolinaMuseo">
       <Routes>
         <Route
           path="/"
