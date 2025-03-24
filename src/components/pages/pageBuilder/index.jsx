@@ -42,7 +42,7 @@ function PageBuilderContent({ variant = "previewTop" }) {
       <div className="flex flex-col h-screen">
         {variant === "previewTop" ? (
           <>
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1">
               <PreviewArea />
             </div>
             <div className="h-64 border-t">

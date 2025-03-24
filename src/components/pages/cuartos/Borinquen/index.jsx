@@ -17,7 +17,7 @@ export default function BorinquenPanel() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Background imageUrl="/assets/cuartos/1/panel.jpg">
+      <Background imageUrl="/carolinaMuseo/assets/cuartos/1/panel.jpg">
         <Button onClick={handleClickButton1}>Button1</Button>
         <Button onClick={handleClickButton2}>Button2</Button>
 
